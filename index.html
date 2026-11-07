@@ -139,7 +139,7 @@
     let yukseklik = canvas.height = window.innerHeight;
 
     let parcaciklar = [];
-    let toplamParcacik = 2500; 
+    let toplamParcacik = 1500; // Mobil kararlılığı ve akıcılık için optimize edildi
     let aktifMod = 0; 
     let fare = { x: null, y: null, yaricap: 100 };
 
@@ -166,7 +166,7 @@
             this.x = Math.random() * genislik;
             this.y = Math.random() * yukseklik;
             this.z = Math.random() * genislik; 
-            this.boyut = Math.random() * 12 + 8; // Emojiler için en ideal boyut ayarı
+            this.boyut = Math.random() * 12 + 10; 
             
             const emojiler = ['❤️', '💖', '💝', '💗', '💕', '✨', '🌸', '🌟'];
             this.ikon = emojiler[Math.floor(Math.random() * emojiler.length)];
@@ -225,7 +225,7 @@
                 cizimX = (this.x - genislik / 2) * k + genislik / 2;
                 cizimY = (this.y - yukseklik / 2) * k + yukseklik / 2;
                 cizimBoyut = this.boyut * k * 1.5;
-                if(cizimBoyut > 40) cizimBoyut = 40;
+                if(cizimBoyut > 45) cizimBoyut = 45;
                 if(cizimX < -50 || cizimX > genislik + 50 || cizimY < -50 || cizimY > yukseklik + 50) return;
             }
 
@@ -248,9 +248,4 @@
         document.querySelectorAll('.Mod-Buton').forEach(b => b.classList.remove('aktif'));
         butonElement.classList.add('aktif');
 
-        if(modNo === 1) {
-            parcaciklar.forEach(p => { p.x = genislik/2; p.y = yukseklik/2; });
-        }
-    }
-
-    function Animasyon() {
+        // Çakışmayı önlemek için tüm parçacıkların konum verilerini anında temizle ve modu taze itele
