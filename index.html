@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Canım Anneme Sonsuz Sevgi Evreni 🌌❤️</title>
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background-color: #0b001a;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            user-select: none; touch-action: none;
+        }
+        
+        /* Arka plandaki devasa çizim alanı */
+        #EvrenCanvas {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 1;
+        }
+
+        /* Ön plandaki arayüz elementleri */
+        .Arayuz-Konteyner {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 2;
+            display: flex; flex-direction: column;
+            justify-content: space-between; align-items: center;
+            padding: 30px 20px; pointer-events: none;
+        }
+
+        /* Cam Efektli Üst Başlık */
+        .Baslik-Karti {
+            background: rgba(255, 182, 193, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 30px; border-radius: 50px;
+            text-align: center; pointer-events: auto;
+            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
+            animation: yukardanGel 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        .Baslik-Karti h1 {
+            margin: 0; color: #fff; font-size: 1.8rem;
+            text-shadow: 0 0 10px #ff7096, 0 0 20px #ff477e;
+            letter-spacing: 1px;
+        }
+
+        /* Merkezdeki İnteraktif Mühürlü Kalp */
+        .Merkez-Alan {
+            display: flex; justify-content: center; align-items: center;
+            flex-grow: 1; pointer-events: auto;
+        }
+        .Muhurlu-Kalp {
+            font-size: 5rem; cursor: pointer; position: relative;
+            animation: devNabiz 2s infinite alternate ease-in-out;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 20px rgba(255, 71, 126, 0.8));
+        }
+        .Muhurlu-Kalp:hover { transform: scale(1.2); }
+        .Muhurlu-Kalp::after {
+            content: 'TIKLA'; position: absolute; bottom: -25px; left: 50%;
+            transform: translateX(-50%); font-size: 0.9rem; color: #fff;
+            font-weight: bold; letter-spacing: 2px; opacity: 0.7;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        /* Açılan Büyülü Mektup Kartı */
+        .Mektup-Karti {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 90%; max-width: 450px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px; padding: 35px;
+            color: #fff; text-align: center; pointer-events: auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255,255,255,0.1);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+        }
+        .Mektup-Karti.acik { transform: translate(-50%, -50%) scale(1); }
+        .Mektup-Metni {
+            font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px;
+            min-height: 120px; font-weight: 400; text-align: left;
+        }
+        .Kapat-Buton {
+            background: linear-gradient(135deg, #ff477e, #ff7096);
+            border: none; color: white; padding: 12px 30px;
+            border-radius: 20px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
+            transition: transform 0.2s;
+        }
+        .Kapat-Buton:active { transform: scale(0.95); }
+
+        /* Alt Değiştirilebilir Kontrol Paneli */
+        .Alt-Panel {
+            display: flex; gap: 12px; pointer-events: auto;
+            animation: asagidanGel 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        .Mod-Buton {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7); padding: 10px 18px;
+            border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+            font-weight: 500; transition: all 0.3s;
+        }
+        .Mod-Buton.aktif, .Mod-Buton:hover {
+            background: rgba(255, 71, 126, 0.2);
+            border-color: #ff477e; color: #fff;
+            box-shadow: 0 0 10px rgba(255, 71, 126, 0.5);
+        }
+
+        /* Animasyon Tanımlamaları */
+        @keyframes yukardanGel { from { transform: translateY(-100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes asagidanGel { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes devNabiz { from { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 71, 126, 0.6)); } to { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(255, 71, 126, 1)); } }
+    </style>
+</head>
+<body>
+
+    <canvas id="EvrenCanvas"></canvas>
+
+    <div class="Arayuz-Konteyner">
+        <div class="Baslik-Karti">
+            <h1>Sonsuz Sevgi Evrenine Hoş Geldin Anneciğim ✨</h1>
+        </div>
+
+        <div class="Merkez-Alan">
+            <div class="Muhurlu-Kalp" id="AnaKalp" onclick="MektupAc()">❤️</div>
+        </div>
+
+        <div class="Alt-Panel">
+            <button class="Mod-Buton aktif" onclick="ModDegistir(0, this)">🌸 Sakin Gece</button>
+            <button class="Mod-Buton" onclick="ModDegistir(1, this)">💥 Sevgi Patlaması</button>
+            <button class="Mod-Buton" onclick="ModDegistir(2, this)">🌌 Sonsuz Yıldızlar</button>
+        </div>
+    </div>
+
+    <div class="Mektup-Karti" id="Mektup">
+        <div class="Mektup-Metni" id="YaziAlani"></div>
+        <button class="Kapat-Buton" onclick="MektupKapat()">Evrene Geri Dön</button>
+    </div>
+
+<script>
+    const canvas = document.getElementById('EvrenCanvas');
+    const ctx = canvas.getContext('2d');
+    const yaziAlani = document.getElementById('YaziAlani');
+    const mektupKarti = document.getElementById('Mektup');
+    const anaKalp = document.getElementById('AnaKalp');
+
+    let genislik = canvas.width = window.innerWidth;
+    let yukseklik = canvas.height = window.innerHeight;
+
+    // 3000 Parçacık Yönetim Sistemi
+    let parcaciklar = [];
+    let toplamParcacik = 3000;
+    let aktifMod = 0; // 0: Sakin, 1: Patlama, 2: Yıldızlar
+    let fare = { x: null, y: null, yaricap: 120 };
+
+    // Pencere boyutu değiştiğinde canvası güncelle
+    window.addEventListener('resize', () => {
+        genislik = canvas.width = window.innerWidth;
+        yukseklik = canvas.height = window.innerHeight;
+        EvrenOlustur();
+    });
+
+    // İnteraktif dokunma koordinatları
+    function FareAyarla(e) {
+        fare.x = e.clientX || (e.touches && e.touches[0].clientX);
+        fare.y = e.clientY || (e.touches && e.touches[0].clientY);
+    }
+    window.addEventListener('mousemove', FareAyarla);
+    window.addEventListener('touchmove', FareAyarla, {passive: true});
+    window.addEventListener('touchend', () => { fare.x = null; fare.y = null; });
+    window.addEventListener('mouseleave', () => { fare.x = null; fare.y = null; });
+
+    // Parçacık Sınıfı (Yüksek Performanslı Yapı)
+    class Parcacik {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * genislik;
+            this.y = Math.random() * yukseklik;
+            this.z = Math.random() * genislik; // 3D Derinlik katmanı
+            this.boyut = Math.random() * 2 + 0.5;
+            
+            // Renk paleti (Pembe, mor ve beyaz tonları)
+            const renkler = ['#ff477e', '#ff7096', '#ff8fab', '#ffb3c6', '#fff0f3', '#e0aaff'];
+            this.renk = renkler[Math.floor(Math.random() * renkler.length)];
+            
+            this.hizX = (Math.random() * 0.4 - 0.2);
+            this.hizY = (Math.random() * 0.4 - 0.2);
+            this.aci = Math.random() * Math.PI * 2;
+            this.dalgaHizi = Math.random() * 0.02 + 0.005;
+            this.kalpMi = Math.random() < 0.25; // %25 ihtimalle kalp şekli çizilecek
+        }
+        guncelle() {
+            if (aktifMod === 0) { // Sakin Gece Modu (Yavaş dalgalanma)
+                this.x += this.hizX + Math.sin(this.aci) * 0.2;
+                this.y += this.hizY + Math.cos(this.aci) * 0.2;
+                this.aci += this.dalgaHizi;
+            } else if (aktifMod === 1) { // Sevgi Patlaması Modu (Merkezden dışa fırlama)
+                let dx = this.x - genislik / 2;
+                let dy = this.y - yukseklik / 2;
+                let mesafe = Math.sqrt(dx * dx + dy * dy) || 1;
+                this.x += (dx / mesafe) * 2.5;
+                this.y += (dy / mesafe) * 2.5;
+                if (this.x < 0 || this.x > genislik || this.y < 0 || this.y > yukseklik) {
+                    this.reset();
+                    this.x = genislik / 2 + (Math.random() * 40 - 20);
+                    this.y = yukseklik / 2 + (Math.random() * 40 - 20);
+                }
+            } else if (aktifMod === 2) { // Sonsuz Yıldızlar Modu (Hızlı 3D akış)
+                this.z -= 2;
+                if (this.z <= 0) {
+                    this.reset();
+                    this.z = genislik;
+                }
+            }
+
+            // Fare/Parmak Etkileşimi (Girdap ve İtme Gücü)
+            if (fare.x != null && fare.y != null) {
+                let fx = this.x - fare.x;
+                let fy = this.y - fare.y;
+                let fMesafe = Math.sqrt(fx * fx + fy * fy);
+                if (fMesafe < fare.yaricap) {
+                    let itmeKuvveti = (fare.yaricap - fMesafe) / fare.yaricap;
