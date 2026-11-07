@@ -139,7 +139,7 @@
     let yukseklik = canvas.height = window.innerHeight;
 
     let parcaciklar = [];
-    let toplamParcacik = 1500; // Mobil kararlılığı ve akıcılık için optimize edildi
+    let toplamParcacik = 1200; 
     let aktifMod = 0; 
     let fare = { x: null, y: null, yaricap: 100 };
 
@@ -248,4 +248,9 @@
         document.querySelectorAll('.Mod-Buton').forEach(b => b.classList.remove('aktif'));
         butonElement.classList.add('aktif');
 
-        // Çakışmayı önlemek için tüm parçacıkların konum verilerini anında temizle ve modu taze itele
+        parcaciklar.forEach(p => {
+            if(modNo === 1) {
+                p.x = genislik / 2;
+                p.y = yukseklik / 2;
+            } else {
+                p.reset();
