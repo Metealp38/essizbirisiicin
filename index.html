@@ -6,100 +6,22 @@
     <title>Canım Anneme Sonsuz Sevgi Evreni 🌌❤️</title>
     <style>
         * { box-sizing: border-box; }
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow: hidden; background-color: #0b001a;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            user-select: none; touch-action: none;
-        }
-        
-        #EvrenCanvas {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; z-index: 1;
-        }
-
-        .Arayuz-Konteyner {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%; z-index: 2;
-            display: flex; flex-direction: column;
-            justify-content: space-between; align-items: center;
-            padding: 30px 20px; pointer-events: none;
-        }
-
-        .Baslik-Karti {
-            background: rgba(255, 182, 193, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 15px 30px; border-radius: 50px;
-            text-align: center; pointer-events: auto;
-            box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2);
-        }
-        .Baslik-Karti h1 {
-            margin: 0; color: #fff; font-size: 1.5rem;
-            text-shadow: 0 0 10px #ff7096, 0 0 20px #ff477e;
-        }
-
-        .Merkez-Alan {
-            display: flex; justify-content: center; align-items: center;
-            flex-grow: 1; pointer-events: auto;
-        }
-        .Muhurlu-Kalp {
-            font-size: 5rem; cursor: pointer; position: relative;
-            animation: devNabiz 1.5s infinite alternate ease-in-out;
-            transition: transform 0.3s;
-            filter: drop-shadow(0 0 20px rgba(255, 71, 126, 0.8));
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0b001a; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; user-select: none; touch-action: none; }
+        #EvrenCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .Arayuz-Konteyner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 30px 20px; pointer-events: none; }
+        .Baslik-Karti { background: rgba(255, 182, 193, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 15px 30px; border-radius: 50px; text-align: center; pointer-events: auto; box-shadow: 0 10px 30px rgba(251, 111, 146, 0.2); }
+        .Baslik-Karti h1 { margin: 0; color: #fff; font-size: 1.5rem; text-shadow: 0 0 10px #ff7096, 0 0 20px #ff477e; }
+        .Merkez-Alan { display: flex; justify-content: center; align-items: center; flex-grow: 1; pointer-events: auto; }
+        .Muhurlu-Kalp { font-size: 5rem; cursor: pointer; position: relative; animation: devNabiz 1.5s infinite alternate ease-in-out; transition: transform 0.3s; filter: drop-shadow(0 0 20px rgba(255, 71, 126, 0.8)); }
         .Muhurlu-Kalp:hover { transform: scale(1.2); }
-        .Muhurlu-Kalp::after {
-            content: 'TIKLA'; position: absolute; bottom: -25px; left: 50%;
-            transform: translateX(-50%); font-size: 0.9rem; color: #fff;
-            font-weight: bold; opacity: 0.7; text-shadow: 0 0 5px #fff;
-        }
-
-        .Mektup-Karti {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 90%; max-width: 450px;
-            background: rgba(15, 5, 30, 0.9);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 2px solid #ff7096;
-            border-radius: 30px; padding: 35px;
-            color: #fff; text-align: center; pointer-events: auto;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 5;
-        }
+        .Muhurlu-Kalp::after { content: 'TIKLA'; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 0.9rem; color: #fff; font-weight: bold; opacity: 0.7; text-shadow: 0 0 5px #fff; }
+        .Mektup-Karti { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); width: 90%; max-width: 450px; background: rgba(15, 5, 30, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 2px solid #ff7096; border-radius: 30px; padding: 35px; color: #fff; text-align: center; pointer-events: auto; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 5; }
         .Mektup-Karti.acik { transform: translate(-50%, -50%) scale(1); }
-        .Mektup-Metni {
-            font-size: 1.1rem; line-height: 1.7; margin-bottom: 25px;
-            min-height: 120px; font-weight: 400; text-align: left;
-            white-space: pre-line;
-        }
-        .Kapat-Buton {
-            background: linear-gradient(135deg, #ff477e, #ff7096);
-            border: none; color: white; padding: 12px 30px;
-            border-radius: 20px; font-weight: bold; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
-        }
-
-        .Alt-Panel {
-            display: flex; gap: 10px; pointer-events: auto;
-            flex-wrap: wrap; justify-content: center;
-        }
-        .Mod-Buton {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7); padding: 12px 20px;
-            border-radius: 20px; cursor: pointer; font-size: 0.9rem;
-            font-weight: bold; transition: all 0.3s;
-        }
-        .Mod-Buton.aktif, .Mod-Buton:hover {
-            background: #ff477e; border-color: #ff477e; color: #fff;
-            box-shadow: 0 0 15px #ff477e;
-        }
-
+        .Mektup-Metni { font-size: 1.1rem; line-height: 1.7; margin-bottom: 25px; min-height: 120px; font-weight: 400; text-align: left; white-space: pre-line; }
+        .Kapat-Buton { background: linear-gradient(135deg, #ff477e, #ff7096); border: none; color: white; padding: 12px 30px; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4); }
+        .Alt-Panel { display: flex; gap: 10px; pointer-events: auto; flex-wrap: wrap; justify-content: center; }
+        .Mod-Buton { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7); padding: 12px 20px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: bold; transition: all 0.3s; }
+        .Mod-Buton.aktif, .Mod-Buton:hover { background: #ff477e; border-color: #ff477e; color: #fff; box-shadow: 0 0 15px #ff477e; }
         @keyframes devNabiz { from { transform: scale(1); } to { transform: scale(1.15); } }
     </style>
 </head>
@@ -128,129 +50,8 @@
         <button class="Kapat-Buton" onclick="MektupKapat()">Evrene Geri Dön</button>
     </div>
 
-<script>
-    const canvas = document.getElementById('EvrenCanvas');
-    const ctx = canvas.getContext('2d');
-    const yaziAlani = document.getElementById('YaziAlani');
-    const mektupKarti = document.getElementById('Mektup');
-    const anaKalp = document.getElementById('AnaKalp');
-
-    let genislik = canvas.width = window.innerWidth;
-    let yukseklik = canvas.height = window.innerHeight;
-
-    let parcaciklar = [];
-    let toplamParcacik = 1200; 
-    let aktifMod = 0; 
-    let fare = { x: null, y: null, yaricap: 100 };
-
-    window.addEventListener('resize', () => {
-        genislik = canvas.width = window.innerWidth;
-        yukseklik = canvas.height = window.innerHeight;
-        EvrenOlustur();
-    });
-
-    function FareAyarla(e) {
-        fare.x = e.clientX || (e.touches && e.touches.length > 0 && e.touches[0].clientX);
-        fare.y = e.clientY || (e.touches && e.touches.length > 0 && e.touches[0].clientY);
-    }
-    window.addEventListener('mousemove', FareAyarla);
-    window.addEventListener('touchmove', FareAyarla, {passive: true});
-    window.addEventListener('touchend', () => { fare.x = null; fare.y = null; });
-    window.addEventListener('mouseleave', () => { fare.x = null; fare.y = null; });
-
-    class Parcacik {
-        constructor() {
-            this.reset();
-        }
-        reset() {
-            this.x = Math.random() * genislik;
-            this.y = Math.random() * yukseklik;
-            this.z = Math.random() * genislik; 
-            this.boyut = Math.random() * 12 + 10; 
-            
-            const emojiler = ['❤️', '💖', '💝', '💗', '💕', '✨', '🌸', '🌟'];
-            this.ikon = emojiler[Math.floor(Math.random() * emojiler.length)];
-            
-            this.hizX = (Math.random() * 0.8 - 0.4);
-            this.hizY = (Math.random() * 0.8 - 0.4);
-            this.aci = Math.random() * Math.PI * 2;
-            this.dalgaHizi = Math.random() * 0.02 + 0.005;
-        }
-        guncelle() {
-            if (aktifMod === 0) { 
-                this.x += this.hizX + Math.sin(this.aci) * 0.3;
-                this.y += this.hizY + Math.cos(this.aci) * 0.3;
-                this.aci += this.dalgaHizi;
-            } else if (aktifMod === 1) { 
-                let dx = this.x - genislik / 2;
-                let dy = this.y - yukseklik / 2;
-                let mesafe = Math.sqrt(dx * dx + dy * dy) || 1;
-                this.x += (dx / mesafe) * 4;
-                this.y += (dy / mesafe) * 4;
-                if (this.x < 0 || this.x > genislik || this.y < 0 || this.y > yukseklik) {
-                    this.reset();
-                    this.x = genislik / 2;
-                    this.y = yukseklik / 2;
-                }
-            } else if (aktifMod === 2) { 
-                this.z -= 4;
-                if (this.z <= 0) {
-                    this.reset();
-                    this.z = genislik;
-                }
-            }
-
-            if (fare.x != null && fare.y != null) {
-                let fx = this.x - fare.x;
-                let fy = this.y - fare.y;
-                let fMesafe = Math.sqrt(fx * fx + fy * fy);
-                if (fMesafe < fare.yaricap) {
-                    let itmeKuvveti = (fare.yaricap - fMesafe) / fare.yaricap;
-                    this.x += (fx / fMesafe) * itmeKuvveti * 6;
-                    this.y += (fy / fMesafe) * itmeKuvveti * 6;
-                }
-            }
-
-            if (aktifMod !== 1 && (this.x < 0 || this.x > genislik || this.y < 0 || this.y > yukseklik)) {
-                this.reset();
-            }
-        }
-        ciz() {
-            let cizimX = this.x;
-            let cizimY = this.y;
-            let cizimBoyut = this.boyut;
-
-            if (aktifMod === 2) {
-                let k = 150 / this.z;
-                cizimX = (this.x - genislik / 2) * k + genislik / 2;
-                cizimY = (this.y - yukseklik / 2) * k + yukseklik / 2;
-                cizimBoyut = this.boyut * k * 1.5;
-                if(cizimBoyut > 45) cizimBoyut = 45;
-                if(cizimX < -50 || cizimX > genislik + 50 || cizimY < -50 || cizimY > yukseklik + 50) return;
-            }
-
-            ctx.font = `${cizimBoyut}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(this.ikon, cizimX, cizimY);
-        }
-    }
-
-    function EvrenOlustur() {
-        parcaciklar = [];
-        for (let i = 0; i < toplamParcacik; i++) {
-            parcaciklar.push(new Parcacik());
-        }
-    }
-
-    function ModDegistir(modNo, butonElement) {
-        aktifMod = modNo;
-        document.querySelectorAll('.Mod-Buton').forEach(b => b.classList.remove('aktif'));
-        butonElement.classList.add('aktif');
-
-        parcaciklar.forEach(p => {
-            if(modNo === 1) {
-                p.x = genislik / 2;
-                p.y = yukseklik / 2;
-            } else {
-                p.reset();
+    <script>
+        const canvas=document.getElementById('EvrenCanvas'),ctx=canvas.getContext('2d'),yaziAlani=document.getElementById('YaziAlani'),mektupKarti=document.getElementById('Mektup'),anaKalp=document.getElementById('AnaKalp');let genislik=canvas.width=window.innerWidth,yukseklik=canvas.height=window.innerHeight,parcaciklar=[],toplamParcacik=1200,aktifMod=0,fare={x:null,y:null,yaricap:100};window.addEventListener('resize',()=>{genislik=canvas.width=window.innerWidth;yukseklik=canvas.height=window.innerHeight;EvrenOlustur();});function FareAyarla(e){fare.x=e.clientX||(e.touches&&e.touches.length>0&&e.touches[0].clientX);fare.y=e.clientY||(e.touches&&e.touches.length>0&&e.touches[0].clientY);}window.addEventListener('mousemove',FareAyarla);window.addEventListener('touchmove',FareAyarla,{passive:true});window.addEventListener('touchend',()=>{fare.x=null;fare.y=null;});window.addEventListener('mouseleave',()=>{fare.x=null;fare.y=null;});class Parcacik{constructor(){this.reset();}reset(){this.x=Math.random()*genislik;this.y=Math.random()*yukseklik;this.z=Math.random()*genislik;this.boyut=Math.random()*12+10;const e=['❤️','💖','💝','💗','💕','✨','🌸','🌟'];this.ikon=e[Math.floor(Math.random()*e.length)];this.hizX=Math.random()*0.8-0.4;this.hizY=Math.random()*0.8-0.4;this.aci=Math.random()*Math.PI*2;this.dalgaHizi=Math.random()*0.02+0.005;}guncelle(){if(0===aktifMod){this.x+=this.hizX+0.3*Math.sin(this.aci);this.y+=this.hizY+0.3*Math.cos(this.aci);this.aci+=this.dalgaHizi;}else if(1===aktifMod){let e=this.x-genislik/2,t=this.y-yukseklik/2,a=Math.sqrt(e*e+t*t)||1;this.x+=e/a*4;this.y+=t/a*4;if(this.x<0||this.x>genislik||this.y<0||this.y>yukseklik){this.reset();this.x=genislik/2;this.y=yukseklik/2;}}else if(2===aktifMod){this.z-=4;if(this.z<=0){this.reset();this.z=genislik;}}if(null!=fare.x&&null!=fare.y){let e=this.x-fare.x,t=this.y-fare.y,a=Math.sqrt(e*e+t*t);if(a<fare.yaricap){let n=(fare.yaricap-a)/fare.yaricap;this.x+=e/a*n*6;this.y+=t/a*n*6;}}if(1!==aktifMod&&(this.x<0||this.x>genislik||this.y<0||this.y>yukseklik))this.reset();}ciz(){let e=this.x,t=this.y,a=this.boyut;if(2===aktifMod){let n=150/this.z;e=(this.x-genislik/2)*n+genislik/2;t=(this.y-yukseklik/2)*n+yukseklik/2;a=this.boyut*n*1.5;if(a>45)a=45;if(e<-50||e>genislik+50||t<-50||t>yukseklik+50)return;}ctx.font=`${a}px Arial`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(this.ikon,e,t);}}function EvrenOlustur(){parcaciklar=[];for(let e=0;e<toplamParcacik;e++)parcaciklar.push(new Parcacik());}function ModDegistir(e,t){aktifMod=e;document.querySelectorAll('.Mod-Buton').forEach(e=>e.classList.remove('aktif'));t.classList.add('aktif');parcaciklar.forEach(t=>{if(1===e){t.x=genislik/2;t.y=yukseklik/2;}else{t.reset();}});}function Animasyon(){ctx.fillStyle='rgba(11, 0, 26, 0.3)';ctx.fillRect(0,0,genislik,yukseklik);parcaciklar.forEach(e=>{e.guncelle();e.ciz();});requestAnimationFrame(Animasyon);}const mektupMetni="Canım Annem... ❤️\n\nSenin her gün bizim için ne kadar çok yorulduğunu çok iyi biliyorum. Bu evrendeki binlerce parlayan yıldız bile senin o güzel kalbinin yanında sönük kalır.\n\nBiliyorum bazen hayat çok yorucu oluyor ama unutma ki ben hep senin yanındayım. İyi ki varsın, iyi ki benim annemsin. Seni sonsuza kadar çok seveceğim! ✨🌸";let yaziIndeksi=0,daktiloZamanlayici;function DaktiloYaz(){if(yaziIndeksi<mektupMetni.length){let e=mektupMetni.charAt(yaziIndeksi);yaziAlani.innerHTML+='\n'===e?'<br>':e;yaziIndeksi++;daktiloZamanlayici=setTimeout(DaktiloYaz,30);}}function MektupAc(){anaKalp.style.display='none';mektupKarti.classList.add('acik');yaziAlani.innerHTML="";yaziIndeksi=0;clearTimeout(daktiloZamanlayici);setTimeout(DaktiloYaz,300);}function MektupKapat(){mektupKarti.classList.remove('acik');setTimeout(()=>{anaKalp.style.display='block';},400);}EvrenOlustur();Animasyon();
+    </script>
+</body>
+</html>
